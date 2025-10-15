@@ -12,9 +12,9 @@ class DeviceFactory:
     def create_device(self, device_config: DeviceConfig) -> Device:
         if not re.match(r'^([0-9A-Fa-f]{2}:){5}[0-9A-Fa-f]{2}$', device_config.macAddress):
             raise InvalidMacAddress("Invalid MAC address format")
-        if not re.match(r'([0-9]\.){3}$', device_config.firmwareVersion):
+        if not re.match(r'^([0-9]\.){3}$', device_config.firmwareVersion):
             raise NonSupportedFirmwareLocationTimezone("Firmware version not supported.")
-        if (device_config.location):
+        if not re.match(r'^[A-Za-z]{1,}\, [A-Z]{2}$', device_config.location):
             raise NonSupportedFirmwareLocationTimezone("Location not supported.")
         if (device_config.timezone):
             raise NonSupportedFirmwareLocationTimezone("Timezone not supported.")
