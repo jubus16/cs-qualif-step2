@@ -16,7 +16,7 @@ class DeviceFactory:
             raise NonSupportedFirmwareLocationTimezone("Firmware version not supported.")
         if not re.match(r'^[A-Za-z]{1,}\, [A-Z]{2}$', device_config.location):
             raise NonSupportedFirmwareLocationTimezone("Location not supported.")
-        if (device_config.timezone):
+        if not re.match(r'^[A-Za-z]{1,}\/[A-Za-z]{1,}$', device_config.timezone):
             raise NonSupportedFirmwareLocationTimezone("Timezone not supported.")
 
         device_id = DeviceId.generate()
